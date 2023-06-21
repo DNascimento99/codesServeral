@@ -1,0 +1,3 @@
+bash
+$ aws logs describe-log-groups --query logGroups[].[logGroupName,storedBytes] --output=table
+$ aws logs describe-log-groups --query "logGroups[?contains(logGroupName, 'hml') || contains(logGroupName, 'HML') || contains(logGroupName, 'homolog') || contains(logGroupName, 'dev') || contains(logGroupName, 'DEV') && retentionInDays != \`1\`].[logGroupName,storedBytes,to_string(retentionInDays || 'never')]" --output table | grep -v 'devops'
